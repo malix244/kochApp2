@@ -1,0 +1,158 @@
+// VARIABLES
+$bg: url("https://wallpaperscraft.com/image/coffee_coffee_beans_cupcake_candy_93301_1920x1080.jpg") no-repeat center;
+$food: url("http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg") no-repeat center;
+
+// FONT
+$font: 'Roboto', sans-serif;
+
+// COLORS
+$white: #fff;
+$black: #212129;
+$gray: #9B9B9B;
+$heart: #17BEBB;
+$star: #FFE500;
+$button: #EF3E36;
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: $bg;
+}
+
+.dashboard-component {
+  > * {
+    margin-bottom: 40px;
+  }
+
+  .ad {
+    height: 300px;
+    display: block;
+    background-image: url('/assets/img/pexels-ray-piedra-1565982.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      margin: 40px;
+      padding: 50px 10%;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .card {
+      position: relative;
+      background: $white;
+      max-width: 30%;
+      min-width: 350px;
+      margin: 20px auto;
+      .header {
+        background: $food;
+        background-size: cover;
+        min-height: 350px;
+        .icon a fa-icon {
+          position: absolute;
+          height: 53px;
+          width: 53px;
+          left: 85%;
+          bottom: 40%;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          align-items: center;
+          background: $heart;
+          color: $white;
+          font-size: 1.3em;
+          font-weight: bold;
+          padding: 15px;
+          border-radius: 50%;
+          box-shadow: 0px 5px 30px 1px $heart;
+        }
+      }
+      .text {
+        .food {
+          color: $black;
+          text-align: left;
+          font-weight: normal;
+          letter-spacing: 0.1em;
+          margin: 5px 30px;
+        }
+        .food-stats {
+          display: flex;
+          flex-direction: row;
+
+          > div {
+            fa-icon {
+              padding-right: 10px;
+            }
+          }
+          .clock {
+            color: $gray;
+            margin: 0 30px;
+          }
+          .users {
+            color: $gray;
+          }
+        }
+
+      }
+      .stars {
+        margin: 10px 30px;
+        li a fa-icon {
+          color: $star;
+        }
+      }
+      .info {
+        margin: 10px 30px;
+      }
+      a.btn {
+        display: block;
+        background: $button;
+        color: $white;
+        position: relative;
+        letter-spacing: 0.1em;
+        text-align: center;
+        padding: 10px;
+        transition: 250ms;
+        &:hover {
+          background: $heart;
+          transition: 250ms;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .card {
+    max-width: 48% !important;
+  }
+}
+
+

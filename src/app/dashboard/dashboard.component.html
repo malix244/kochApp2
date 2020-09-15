@@ -1,1 +1,75 @@
-<p>dashboard works!</p>
+<div class="dashboard-component p-3">
+  <div class="ad">
+    <h1 class="text-uppercase">
+      New ideas for cooking and baking around the clock
+    </h1>
+  </div>
+  <div class="weekly-banner">
+    <h2>
+      Weekly Selection:
+    </h2>
+    <div class="weekly-recipes card-container">
+      <div class="card shadow-lg" *ngFor="let number of numbers">
+        <div class="header">
+          <div class="icon">
+            <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
+          </div>
+        </div>
+        <div class="text">
+          <h3 class="food text-uppercase">
+            Chinese Noodles
+          </h3>
+          <div class="food-stats">
+            <div class="clock"><fa-icon [icon]="farClock"></fa-icon>15 Mins</div>
+            <div class="users"><fa-icon [icon]="farUsers"></fa-icon>Serves 2</div>
+          </div>
+          <div class="stars">
+            <li>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="farStar"></fa-icon></a>
+            </li>
+          </div>
+          <p class="info ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, temporibus.</p>
+        </div>
+        <a href="#" class="btn text-uppercase">Let's Cook!</a>
+      </div>
+    </div>
+  </div>
+  <div class="random-recipes-container">
+    <h2>
+      Random Recipes:
+    </h2>
+    <div class="random-recipes card-container">
+      <div class="card shadow-lg" *ngFor="let number of numbers">
+        <div class="header">
+          <div class="icon">
+            <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
+          </div>
+        </div>
+        <div class="text">
+          <h3 class="food text-uppercase">
+            Chinese Noodles
+          </h3>
+          <div class="food-stats">
+            <div class="clock"><fa-icon [icon]="farClock"></fa-icon>15 Mins</div>
+            <div class="users"><fa-icon [icon]="farUsers"></fa-icon>Serves 2</div>
+          </div>
+          <div class="stars">
+            <li>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="fasStar"></fa-icon></a>
+              <a><fa-icon [icon]="farStar"></fa-icon></a>
+            </li>
+          </div>
+          <p class="info ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, temporibus.</p>
+        </div>
+        <a href="#" class="btn text-uppercase">Let's Cook!</a>
+      </div>
+    </div>
+  </div>
+</div>

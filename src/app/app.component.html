@@ -1,5 +1,5 @@
 <div class="main-body">
-  <div class="main-title">
+  <div class="main-title" (window:resize)="onResize($event)" [routerLink]="['/']" >
     {{"{  Cookous  } "}}
   </div>
 
@@ -11,13 +11,13 @@
           <ul class="navbar-nav">
             <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
             <li class="nav-item active">
-              <a class="nav-link" href="javascript:void(0);">Dashboard</a>
+              <a class="nav-link" [routerLink]="['/']">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0);">Search by Ingredients</a>
+              <a class="nav-link" [routerLink]="['/search-by-ingredients']">Search by Ingredients</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0);">Search per Filter</a>
+              <a class="nav-link" [routerLink]="['/search-per-filter']">Search per Filter</a>
             </li>
           </ul>
           <form class="form-inline">
