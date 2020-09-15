@@ -13,13 +13,6 @@ export class AppComponent implements OnInit{
   title = 'KochApp';
   img = 'pexels-lukas-349609.jpg';
   faCoffee = faCoffee;
-  private tabsNewAnim;
-  private selectorNewAnim;
-  private activeItemNewAnim;
-  private activeWidthNewAnimHeight;
-  private activeWidthNewAnimWidth;
-  private itemPosNewAnimTop;
-  private itemPosNewAnimLeft;
 
   constructor(private apiService: ApiService, ) {
     this.apiService.loadRecipes().then(() => {
@@ -32,41 +25,38 @@ export class AppComponent implements OnInit{
   }
 
   private test(): void {
-    this.tabsNewAnim = $('#navbarSupportedContent');
-    this.selectorNewAnim = $('#navbarSupportedContent').find('li').length;
-    this.activeItemNewAnim = this.tabsNewAnim.find('.active');
-    this.activeWidthNewAnimHeight = this.activeItemNewAnim.innerHeight();
-    this.activeWidthNewAnimWidth = this.activeItemNewAnim.innerWidth();
-    this.itemPosNewAnimTop = this.activeItemNewAnim.position();
-    this.itemPosNewAnimLeft = this.activeItemNewAnim.position();
+    const tabsNewAnim = $('#navbarSupportedContent');
+    const selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+    const activeItemNewAnim = tabsNewAnim.find('.active');
+    let activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+    let activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+    let itemPosNewAnimTop = activeItemNewAnim.position();
+    let itemPosNewAnimLeft = activeItemNewAnim.position();
+
     $('.hori-selector').css({
-      top: this.itemPosNewAnimTop.top + 'px',
-      left: this.itemPosNewAnimLeft.left + 'px',
-      height: this.activeWidthNewAnimHeight + 'px',
-      width: this.activeWidthNewAnimWidth + 'px'
+      top: itemPosNewAnimTop.top + 'px',
+      left: itemPosNewAnimLeft.left + 'px',
+      height: activeWidthNewAnimHeight + 'px',
+      width: activeWidthNewAnimWidth + 'px'
     });
 
     $('#navbarSupportedContent').on('click', 'li', function(e): void {
-      console.log($(this));
-      this.refresh($(this));
+      $('#navbarSupportedContent ul li').removeClass('active');
+      $(this).addClass('active');
+      activeWidthNewAnimHeight = $(this).innerHeight();
+      activeWidthNewAnimWidth = $(this).innerWidth();
+      itemPosNewAnimTop = $(this).position();
+      itemPosNewAnimLeft = $(this).position();
+      $('.hori-selector').css({
+        top: itemPosNewAnimTop.top + 'px',
+        left: itemPosNewAnimLeft.left + 'px',
+        height: activeWidthNewAnimHeight + 'px',
+        width: activeWidthNewAnimWidth + 'px'
+      });
     });
   }
 
-  public refresh(elem): void {
-    $('#navbarSupportedContent ul li').removeClass('active');
-    elem.addClass('active');
-    this.activeWidthNewAnimHeight = $(this).innerHeight();
-    this.activeWidthNewAnimWidth = $(this).innerWidth();
-    this.itemPosNewAnimTop = $(this).position();
-    this.itemPosNewAnimLeft = $(this).position();
-    $('.hori-selector').css({
-      top: this.itemPosNewAnimTop.top + 'px',
-      left: this.itemPosNewAnimLeft.left + 'px',
-      height: this.activeWidthNewAnimHeight + 'px',
-      width: this.activeWidthNewAnimWidth + 'px'
-    });
-  }
   onResize($event: any): any {
-    this.refresh($('#navbarSupportedContent ul active'));
+    window.location.reload();
   }
 }
