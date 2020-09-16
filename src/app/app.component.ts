@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService} from './shared/api-service/api.service';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faList } from '@fortawesome/free-solid-svg-icons';
 
 declare var $: any;
 
@@ -12,47 +12,33 @@ declare var $: any;
 export class AppComponent implements OnInit{
   title = 'KochApp';
   img = 'pexels-lukas-349609.jpg';
-  faCoffee = faCoffee;
+  navBarIcon = faList;
 
   constructor(private apiService: ApiService, ) {
     this.apiService.loadRecipes().then(() => {
       console.log(this.apiService.getRecipes());
-      this.test();
+      // this.test();
+      this.toggle();
     });
   }
 
   ngOnInit(): void {
   }
 
-  private test(): void {
-    const tabsNewAnim = $('#navbarSupportedContent');
-    const selectorNewAnim = $('#navbarSupportedContent').find('li').length;
-    const activeItemNewAnim = tabsNewAnim.find('.active');
-    let activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
-    let activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-    let itemPosNewAnimTop = activeItemNewAnim.position();
-    let itemPosNewAnimLeft = activeItemNewAnim.position();
-
-    $('.hori-selector').css({
-      top: itemPosNewAnimTop.top + 'px',
-      left: itemPosNewAnimLeft.left + 'px',
-      height: activeWidthNewAnimHeight + 'px',
-      width: activeWidthNewAnimWidth + 'px'
+  // Navbar toggle
+  private toggle(): void {
+    $('#search-button').on('click', (e) => {
+      if ($('#search-input-container').hasClass('hdn')) {
+        e.preventDefault();
+        $('#search-input-container').removeClass('hdn');
+        return false;
+      }
     });
 
-    $('#navbarSupportedContent').on('click', 'li', function(e): void {
-      $('#navbarSupportedContent ul li').removeClass('active');
-      $(this).addClass('active');
-      activeWidthNewAnimHeight = $(this).innerHeight();
-      activeWidthNewAnimWidth = $(this).innerWidth();
-      itemPosNewAnimTop = $(this).position();
-      itemPosNewAnimLeft = $(this).position();
-      $('.hori-selector').css({
-        top: itemPosNewAnimTop.top + 'px',
-        left: itemPosNewAnimLeft.left + 'px',
-        height: activeWidthNewAnimHeight + 'px',
-        width: activeWidthNewAnimWidth + 'px'
-      });
+    $('#hide-search-input-container').on('click', (e) => {
+      e.preventDefault();
+      $('#search-input-container').addClass('hdn');
+      return false;
     });
   }
 

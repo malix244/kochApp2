@@ -1,18 +1,14 @@
 <div class="main-body">
-  <div class="main-title" (window:resize)="onResize($event)" [routerLink]="['/']" >
+  <div class="main-title" [routerLink]="['/']" >
     {{"{  Cookous  } "}}
   </div>
 
   <div class="main-frame shadow-lg mb-5 bg-white rounded">
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
-      <nav class="navbar navbar-expand-xl">
-        <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav">
-            <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+      <nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
+        <div class="cbp-hsinner">
+          <ul class="cbp-hsmenu">
             <li class="nav-item active">
               <a class="nav-link" [routerLink]="['/']">Dashboard</a>
             </li>
@@ -22,15 +18,16 @@
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/search-per-filter']">Search per Filter</a>
             </li>
+            <li>
+              <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </li>
           </ul>
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </div>
       </nav>
     </div>
-
     <div class="content" role="main">
       <router-outlet></router-outlet>
     </div>

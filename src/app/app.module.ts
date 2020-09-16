@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { FilterSearchComponent } from './filter-search/filter-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const defaultRoute: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
@@ -27,6 +28,7 @@ const defaultRoute: Routes = [
     FontAwesomeModule,
     HttpClientModule,
     RouterModule.forRoot(defaultRoute),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
