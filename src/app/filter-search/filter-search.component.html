@@ -1,52 +1,52 @@
-<div _ngcontent-gxn-c2 class="filter-component">
+<div class="filter-component">
     <div class="filters">
         <ul class="filter-checkboxes">
             <li class="filter-vegetarian">
                 <div class="checkbox">
-                    <input class="checkbox" type="checkbox" id="vegetarian" name="vegetarian">
+                    <input (change)="onSelectVegetarian($event)" class="checkbox" type="checkbox" id="checkboxVegetarian" name="vegetarian">
                 </div>
                 <div class="label">
-                    <label for="vegetarian">vegetarian</label>
+                    <label for="checkboxVegetarian">vegetarian</label>
                 </div>
             </li>
             <li class="filter-vegan">
                 <div class="checkbox">
-                    <input class="checkbox" type="checkbox" id="vegan" name="vegan">
+                    <input (change)="onSelectVegan($event)" class="checkbox" type="checkbox" id="checkboxVegan" name="vegan">
                 </div>
                 <div class="label">
-                    <label for="vegan">vegan</label>
+                    <label for="checkboxVegan">vegan</label>
                 </div>
             </li>
             <li class="filter-meat">
                 <div class="checkbox">
-                    <input class="checkbox" type="checkbox" id="meat" name="meat">
+                    <input (change)="onSelectMeat($event)" class="checkbox" type="checkbox" id="checkboxMeat" name="meat">
                 </div>
                 <div class="label">
-                    <label for="meat">meat</label>
+                    <label for="checkboxMeat">meat</label>
                 </div>
             </li>
             <li class="filter-fish">
                 <div class="checkbox">
-                    <input class="checkbox" type="checkbox" id="fish" name="fish">
+                    <input (change)="onSelectFish($event)" class="checkbox" type="checkbox" id="checkboxFish" name="fish">
                 </div>
                 <div class="label">
-                    <label for="fish">fish</label>
+                    <label for="checkboxFish">fish</label>
                 </div>
             </li>
             <li class="filter-main-dish">
                 <div class="checkbox">
-                    <input class="checkbox" type="checkbox" id="main-dish" name="main-dish">
+                    <input (change)="onSelectMainDish($event)" class="checkbox" type="checkbox" id="checkboxMainDish" name="main-dish">
                 </div>
                 <div class="label">
-                    <label for="main-dish">main dish</label>
+                    <label for="checkboxMainDish">main dish</label>
                 </div>
             </li>
             <li class="filter-dessert">
                 <div class="checkbox">
-                    <input class="checkbox" type="checkbox" id="dessert" name="dessert">
+                    <input (change)="onSelectDessert($event)" class="checkbox" type="checkbox" id="checkboxDessert" name="dessert">
                 </div>
                 <div class="label">
-                    <label for="dessert">dessert</label>
+                    <label for="checkboxDessert">dessert</label>
                 </div>
             </li>
         </ul>
@@ -54,7 +54,7 @@
 
     <div class="recipes">
         <ul id="recipes">
-            <li>
+            <li *ngFor="let number of numbers">
                 <div class="favouriteIcon">
                     <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
                 </div>
@@ -73,9 +73,13 @@
                         </div>
                         <div class="recipe-stats">
                             <div class="stars">
-                                <div class="stars-symbol">
-
-                                </div>
+                                <li>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="farStar"></fa-icon></a>
+                                </li>
                             </div>
                             <div class="time">
                                 <div class="time-symbol">
