@@ -9,6 +9,7 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { FilterSearchComponent } from './filter-search/filter-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DecodeHtmlEntitiesModule} from 'decode-html-entities';
 
 const defaultRoute: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
@@ -21,7 +22,7 @@ const defaultRoute: Routes = [
     AppComponent,
     DashboardComponent,
     RecipeComponent,
-    FilterSearchComponent
+    FilterSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,9 @@ const defaultRoute: Routes = [
     HttpClientModule,
     RouterModule.forRoot(defaultRoute),
     NgbModule,
+    DecodeHtmlEntitiesModule
   ],
+  exports: [DecodeHtmlEntitiesModule],
   providers: [],
   bootstrap: [AppComponent]
 })

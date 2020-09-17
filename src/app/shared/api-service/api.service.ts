@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
-import * as _ from 'lodash';
+import {concatMap, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private promise: Promise<unknown>;
-  private recipes: any;
+  private recipe: any;
+  private detailsURL: string;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -21,17 +21,48 @@ export class ApiService {
     })
   };
 
-  private httpRequest(url: string): Observable<any> {
-    const PHP_API_SERVER = 'http://localhost:4200/api/?';
-    return this.httpClient.get(`${PHP_API_SERVER}${url}`);
+  protected httpRequest(url: string): Observable<any> {
+    const ind = url.substring(
+      url.indexOf('.') + 1,
+      url.lastIndexOf('.')
+    );
+    url = url.substring(url.lastIndexOf('.'));
+    url = url.substring(url.indexOf('/'));
+
+    const PHP_API_SERVER = 'http://localhost:4200/';
+    console.log(ind, url);
+    return this.httpClient.get(`${PHP_API_SERVER}${ind}${url}`);
   }
 
-  public loadRecipes(): Promise<any> {
+  public loadRecipes(ingredients: string[], queries: string|string[]): Promise<any> {
+    const randomNumb = this.randomNumber(0, 9);
+    let url = 'i=';
+    ingredients.forEach((ingredient, index) => {
+      url += ingredient;
+      if (index !== ingredients.length - 1){
+        url += ',';
+      }
+    });
+    if (typeof queries !== 'string'){
+      url += '&q=';
+      queries.forEach((query, index) => {
+        url += query;
+        if (index !== queries.length - 1){
+          url += ',';
+        }
+      });
+    }
     this.promise = new Promise((resolve, reject) => {
-      this.httpRequest('i=onions,garlic&q=omelet')
+      this.httpRequest('http://www.recipepuppy.com/api/?' + url)
         .pipe(
           tap(res => {
-            this.recipes = res;
+            this.recipe = res.results[randomNumb];
+            this.detailsURL = this.recipe.href;
+            }
+          ),
+          concatMap(() => this.httpRequest(this.detailsURL)),
+          tap( res => {
+            console.log(res);
             }
           )
         )
@@ -41,14 +72,19 @@ export class ApiService {
             resolve();
           },
           msg => {
-            reject(msg);
+            // this.loadRecipes(['onion'], '');
           }
         );
     });
     return this.promise;
   }
 
-  public getRecipes(): any {
-    return this.recipes;
+  public getRandomRecipes(): any {
+    return this.recipe;
   }
+
+  private randomNumber(min, max): number {
+    return (Math.random() * (max - min) + min).toFixed();
+  }
+
 }

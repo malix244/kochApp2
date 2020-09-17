@@ -149,8 +149,13 @@ body {
 
 @media only screen and (max-width: 1400px) {
   .card {
-    max-width: 48% !important;
+    max-width: 30% !important;
   }
 }
 
 
+@media only screen and (max-width: 1000px) {
+  .card {
+    max-width: 48% !important;
+  }
+}

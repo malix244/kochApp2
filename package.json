@@ -29,6 +29,7 @@
     "@types/lodash": "^4.14.161",
     "angular-cli": "^1.0.0-beta.28.3",
     "bootstrap": "^4.5.2",
+    "decode-html-entities": "^1.1.10",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "rxjs": "~6.6.0",
