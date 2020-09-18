@@ -9,7 +9,7 @@
       Weekly Selection:
     </h2>
     <div class="weekly-recipes card-container">
-      <div class="card shadow-lg" *ngFor="let recipe of [1,2]">
+      <div class="card shadow-lg" *ngFor="let recipe of weeklyRecipes">
         <div class="header" [ngStyle]="{'background': 'url(' + getBackground(recipe) + ') no-repeat center', 'background-size' : 'cover'}">
           <div class="icon">
             <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
@@ -17,7 +17,7 @@
         </div>
         <div class="text">
           <h3 class="food text-uppercase">
-            Noodle
+            {{ recipe.name }}
           </h3>
           <div class="food-stats">
             <div class="clock"><fa-icon [icon]="farClock"></fa-icon>{{ recipe.cook_time_minutes + recipe.prep_time_minutes }} Mins</div>
@@ -25,31 +25,7 @@
           </div>
           <div class="stars">
             <li >
-              <a *ngFor="let ratingStar of calculatedStars(0.78)">
-                <fa-icon [icon]="ratingStar"></fa-icon>
-              </a>
-            </li>
-          </div>
-        </div>
-        <a class="btn text-uppercase" (click)="open(mymodal, recipe)">Let's Cook!</a>
-      </div>
-      <div class="card shadow-lg" *ngFor="let recipe of [1]">
-        <div class="header" [ngStyle]="{'background': 'url(' + getBackground(recipe) + ') no-repeat center', 'background-size' : 'cover'}">
-          <div class="icon">
-            <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
-          </div>
-        </div>
-        <div class="text">
-          <h3 class="food text-uppercase">
-            chniese noodle salat with noodles and more chicken and rice and noodles and wine and chicken
-          </h3>
-          <div class="food-stats">
-            <div class="clock"><fa-icon [icon]="farClock"></fa-icon>{{ recipe.cook_time_minutes + recipe.prep_time_minutes }} Mins</div>
-            <div class="users"><fa-icon [icon]="farUsers"></fa-icon>{{ recipe.yields}}</div>
-          </div>
-          <div class="stars">
-            <li >
-              <a *ngFor="let ratingStar of calculatedStars(0.78)">
+              <a *ngFor="let ratingStar of calculatedStars(recipe.user_ratings.score)">
                 <fa-icon [icon]="ratingStar"></fa-icon>
               </a>
             </li>
@@ -65,7 +41,7 @@
     </h2>
     <div class="random-recipes card-container">
       <div class="card shadow-lg" *ngFor="let recipe of randomRecipes">
-        <div class="header" [ngStyle]="{'background': 'url(' + recipe.thumbnail_url + ') no-repeat center', 'background-size' : 'cover'}">
+        <div class="header" [ngStyle]="{'background': 'url(' + getBackground(recipe) + ') no-repeat center', 'background-size' : 'cover'}">
           <div class="icon">
             <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
           </div>
@@ -75,16 +51,14 @@
             {{ recipe.name }}
           </h3>
           <div class="food-stats">
-            <div class="clock"><fa-icon [icon]="farClock"></fa-icon>15 Mins</div>
-            <div class="users"><fa-icon [icon]="farUsers"></fa-icon>Serves 2</div>
+            <div class="clock"><fa-icon [icon]="farClock"></fa-icon>{{ recipe.cook_time_minutes + recipe.prep_time_minutes }} Mins</div>
+            <div class="users"><fa-icon [icon]="farUsers"></fa-icon>{{ recipe.yields}}</div>
           </div>
           <div class="stars">
-            <li>
-              <a><fa-icon [icon]="fasStar"></fa-icon></a>
-              <a><fa-icon [icon]="fasStar"></fa-icon></a>
-              <a><fa-icon [icon]="fasStar"></fa-icon></a>
-              <a><fa-icon [icon]="fasStar"></fa-icon></a>
-              <a><fa-icon [icon]="farStar"></fa-icon></a>
+            <li >
+              <a *ngFor="let ratingStar of calculatedStars(recipe.user_ratings.score)">
+                <fa-icon [icon]="ratingStar"></fa-icon>
+              </a>
             </li>
           </div>
         </div>
@@ -110,20 +84,22 @@
       </div>
       <div class="description">
         <h2>{{ currRecipe.name }} Noodle</h2>
-        <h4>Description</h4>
-        <p>Here comes the description: idfhspdoif s fusdhf sdh udfhsdfh sdfhsdpfsdhfh   sdhfsdfhsldhf fh dfhskfh sdfh dsfhsdf d sdfh sdhf  sdfh sdhf dsh fs sdhf sdkjfh fdsk  fsdjfh jdhf sdfkldsfhlsfe hfifhe f sdfhsdiofh ofis</p>
+        <h4 *ngIf="currRecipe.description.length > 2">Description</h4>
+        <p *ngIf="currRecipe.description.length > 2">
+          {{ currRecipe.description }}
+        </p>
         <h4>Ingredience</h4>
         <div>
-          <ul>
-            <li><p>Ingredience 1</p></li>
-            <li><p>Ingredience 2</p></li>
-            <li><p>Ingredience 3</p></li>
-            <li><p>Ingredience 4</p></li>
-            <li><p>Ingredience 5</p></li>
+          <ul *ngFor="let ingredienceSection of currRecipe.sections">
+            <li *ngFor="let ingredience of ingredienceSection.components">
+              <p>{{ingredience.raw_text}}</p>
+            </li>
           </ul>
         </div>
         <h4>Instructions</h4>
-        <p>Here comes the Instructions</p>
+        <p *ngFor="let instruction of currRecipe.instructions">
+          {{instruction.display_text}}
+        </p>
       </div>
     </div>
   </div>
