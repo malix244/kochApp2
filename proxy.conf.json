@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "http://www.recipepuppy.com",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}
