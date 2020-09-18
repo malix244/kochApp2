@@ -1,24 +1,18 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from '../api-service/api.service';
-import {timeout} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService{
   private randomRecipe: any;
-  private randomRecipes: any[];
-  private randomIngrediences = [
-    'garlic', 'bread', 'pasta', 'couscous', 'rice', 'flour', 'sugar', 'brown sugar', 'powdered sugar', 'baking powder',
-    'Chicken stock', 'Beef stock', 'Butter', 'Heavy cream', 'Eggs', 'milk', 'Parmesan', 'Bacon', 'Parsley',
-    'Celery', 'Carrots', 'Lemons', 'Limes', 'Orange juice', 'Ketchup', 'Mayonnaise', 'vegetable oil',
-    'olive oil', 'Vinegar', 'Mustard', 'Honey', 'Shallots', 'Potatoes', 'Onions', 'Tomatoes', 'diced Tomatoes', 'chocolate',
-    'Beans', 'Feta', 'Cheddar', 'Mozzarella', 'Cream', 'yoghurt', 'ground beef',
-    'chicken', 'salami', 'shrimp', 'Cauliflower', 'spinach'
-  ];
+  public randomRecipes = [];
+  public weeklyRecipes = [];
+  private randomFilters: any[];
+  private loadFilter: boolean;
 
   constructor(private apiService: ApiService) {
-    this.randomRecipes = [];
+    this.loadFilter = true;
   }
 
   // arr = Array with your items,
@@ -40,13 +34,21 @@ export class RecipeService{
   public getRandomRecipes(): any {
     return this.randomRecipes;
   }
+  public getWeeklyRecipes(): any {
+    return this.weeklyRecipes;
+  }
 
-  public async loadRandomRecipes(numberOfRecipes: number): Promise<any> {
-    for (let i = 0; i < numberOfRecipes; i++) {
-      await this.apiService.loadRecipes(this.getRandom(this.randomIngrediences, 2), '').then(() => {
-        this.randomRecipe = this.apiService.getRandomRecipes();
-        this.randomRecipes.push(this.randomRecipe);
-      });
-    }
+  public loadRecipes(numberOfRecipes: number): Promise<any> {
+    return this.apiService.loadTags().then(async () => {
+      this.randomFilters = this.apiService.getFilter();
+      for (let i = 0; i < numberOfRecipes; i++) {
+        await this.apiService.loadRecipes(this.getRandom(this.randomFilters, 1)).then(async () => {
+          this.randomRecipes = this.apiService.getRandomRecipes();
+          await this.apiService.loadRecipes(this.randomFilters[i], false).then(() => {
+            this.weeklyRecipes = this.apiService.getWeeklyRecipes();
+          });
+        });
+      }
+    });
   }
 }

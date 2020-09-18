@@ -10,13 +10,23 @@ $primary-color: #32521d;
 
   .main-title {
     height: auto;
+    min-height: 100px;
     width: 100%;
     padding-bottom: 30px;
     display: flex;
     justify-content: center;
-    font-family: 'Pacifico', cursive;
-    font-size: 6em;
-    color: #423d3d;
+    > * {
+      height: auto;
+      min-height: 100px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 6em;
+      color: #423d3d;
+    }
   }
 
   .main-frame {
