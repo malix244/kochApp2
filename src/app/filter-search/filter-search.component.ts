@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faHeart as fasHeart, faSleigh, faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farHeart, faStar as farStar, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
+import { CheckboxControlValueAccessor } from '@angular/forms';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-filter-search',
@@ -50,64 +52,66 @@ export class FilterSearchComponent implements OnInit {
   // tslint:disable-next-line: typedef
   onSelectVegetarian(event) {
     if (event.target.checked) {
-      document.getElementById('checkboxMeat').disabled = true;
-      document.getElementById('checkboxFish').disabled = true;
+      (document.getElementById('checkboxMeat') as any).disabled = true;
+
+
+      (document.getElementById('checkboxFish') as any).disabled = true;
     } else {
-      document.getElementById('checkboxMeat').disabled = false;
-      document.getElementById('checkboxFish').disabled = false;
+      (document.getElementById('checkboxMeat') as any).disabled = false;
+      (document.getElementById('checkboxFish') as any).disabled = false;
     }
   }
 
   // tslint:disable-next-line: typedef
   onSelectVegan(event) {
     if (event.target.checked) {
-      document.getElementById('checkboxMeat').disabled = true;
-      document.getElementById('checkboxFish').disabled = true;
-      document.getElementById('checkboxVegetarian').disabled = true;
+      (document.getElementById('checkboxMeat') as any).disabled = true;
+      (document.getElementById('checkboxFish') as any).disabled = true;
+      (document.getElementById('checkboxVegetarian') as any).disabled = true;
     } else {
-      document.getElementById('checkboxMeat').disabled = false;
-      document.getElementById('checkboxFish').disabled = false;
-      document.getElementById('checkboxVegetarian').disabled = false;
+      (document.getElementById('checkboxMeat') as any).disabled = false;
+      (document.getElementById('checkboxFish') as any).disabled = false;
+      (document.getElementById('checkboxVegetarian') as any).disabled = false;
     }
   }
 
   // tslint:disable-next-line: typedef
   onSelectMeat(event) {
     if (event.target.checked) {
-      document.getElementById('checkboxVegetarian').disabled = true;
-      document.getElementById('checkboxVegan').disabled = true;
+      (document.getElementById('checkboxVegetarian') as any).disabled = true;
+      (document.getElementById('checkboxVegan') as any).disabled = true;
     } else {
-      document.getElementById('checkboxVegetarian').disabled = false;
-      document.getElementById('checkboxVegan').disabled = false;
+      (document.getElementById('checkboxVegetarian') as any).disabled = false;
+      (document.getElementById('checkboxVegan') as any).disabled = false;
     }
   }
 
   // tslint:disable-next-line: typedef
   onSelectFish(event) {
     if (event.target.checked) {
-      document.getElementById('checkboxVegetarian').disabled = true;
-      document.getElementById('checkboxVegan').disabled = true;
+      (document.getElementById('checkboxVegetarian') as any).disabled = true;
+      (document.getElementById('checkboxVegan') as any).disabled = true;
     } else {
-      document.getElementById('checkboxVegetarian').disabled = false;
-      document.getElementById('checkboxVegan').disabled = false;
+      (document.getElementById('checkboxVegetarian') as any).disabled = false;
+      (document.getElementById('checkboxVegan') as any).disabled = false;
     }
   }
 
   // tslint:disable-next-line: typedef
   onSelectMainDish(event) {
     if (event.target.checked) {
-      document.getElementById('checkboxDessert').disabled = true;
+      (document.getElementById('checkboxDessert') as any).disabled = true;
     } else {
-      document.getElementById('checkboxDessert').disabled = false;
+      (document.getElementById('checkboxDessert') as any).disabled = false;
     }
   }
 
   // tslint:disable-next-line: typedef
   onSelectDessert(event) {
     if (event.target.checked) {
-      document.getElementById('checkboxMainDish').disabled = true;
+      (document.getElementById('checkboxMainDish') as any).disabled = true;
     } else {
-      document.getElementById('checkboxMainDish').disabled = false;
+      (document.getElementById('checkboxMainDish') as any).disabled = false;
     }
   }
 
