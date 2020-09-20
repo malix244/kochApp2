@@ -4,7 +4,10 @@
       New ideas for cooking and baking around the clock
     </h1>
   </div>
-  <div class="weekly-banner">
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="weekly-banner" *ngIf="weeklyRecipes.length === 3">
     <h2>
       Weekly Selection:
     </h2>
@@ -17,14 +20,14 @@
         </div>
         <div class="text">
           <h3 class="food text-uppercase">
-            {{ recipe.name }}
+            {{ (recipe.name.length>40)? (recipe.name | slice:0:40)+'..':(recipe.name) }}
           </h3>
           <div class="food-stats">
             <div class="clock"><fa-icon [icon]="farClock"></fa-icon>{{ recipe.cook_time_minutes + recipe.prep_time_minutes }} Mins</div>
             <div class="users"><fa-icon [icon]="farUsers"></fa-icon>{{ recipe.yields}}</div>
           </div>
           <div class="stars">
-            <li >
+            <li *ngIf="recipe.user_ratings !== undefined">
               <a *ngFor="let ratingStar of calculatedStars(recipe.user_ratings.score)">
                 <fa-icon [icon]="ratingStar"></fa-icon>
               </a>
@@ -35,7 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="random-recipes-container" *ngIf="loading === false">
+  <div class="random-recipes-container" *ngIf="randomRecipes.length === 3">
     <h2>
       Random Recipes:
     </h2>
@@ -48,14 +51,14 @@
         </div>
         <div class="text">
           <h3 class="food text-uppercase">
-            {{ recipe.name }}
+            {{ (recipe.name.length>40)? (recipe.name | slice:0:40)+'..':(recipe.name) }}
           </h3>
           <div class="food-stats">
             <div class="clock"><fa-icon [icon]="farClock"></fa-icon>{{ recipe.cook_time_minutes + recipe.prep_time_minutes }} Mins</div>
             <div class="users"><fa-icon [icon]="farUsers"></fa-icon>{{ recipe.yields}}</div>
           </div>
           <div class="stars">
-            <li >
+            <li *ngIf="recipe.user_ratings !== undefined">
               <a *ngFor="let ratingStar of calculatedStars(recipe.user_ratings.score)">
                 <fa-icon [icon]="ratingStar"></fa-icon>
               </a>
@@ -84,8 +87,8 @@
       </div>
       <div class="description">
         <h2>{{ currRecipe.name }} Noodle</h2>
-        <h4 *ngIf="currRecipe.description.length > 2">Description</h4>
-        <p *ngIf="currRecipe.description.length > 2">
+        <h4 *ngIf="currRecipe.description !== null">Description</h4>
+        <p *ngIf="currRecipe.description !== null">
           {{ currRecipe.description }}
         </p>
         <h4>Ingredience</h4>

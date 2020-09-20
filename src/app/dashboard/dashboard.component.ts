@@ -3,6 +3,8 @@ import {faHeart as fasHeart, faStar as fasStar } from '@fortawesome/free-solid-s
 import {faHeart as farHeart, faStar as farStar, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import {RecipeService} from '../shared/recipes/recipe.service';
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 
 
@@ -23,6 +25,9 @@ export class DashboardComponent implements OnInit {
   title = 'ng-bootstrap-modal-demo';
   closeResult: string;
   modalOptions: NgbModalOptions;
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
+  value = 50;
 
   public randomRecipes = [];
   public weeklyRecipes = [];

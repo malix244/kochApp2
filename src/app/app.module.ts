@@ -8,6 +8,7 @@ import { FilterSearchComponent } from './filter-search/filter-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const defaultRoute: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
@@ -21,14 +22,15 @@ const defaultRoute: Routes = [
     DashboardComponent,
     FilterSearchComponent
   ],
-  imports: [
-    BrowserModule,
-    FontAwesomeModule,
-    HttpClientModule,
-    RouterModule.forRoot(defaultRoute),
-    NgbModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        FontAwesomeModule,
+        HttpClientModule,
+        RouterModule.forRoot(defaultRoute),
+        NgbModule,
+        FormsModule,
+        MatProgressSpinnerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
