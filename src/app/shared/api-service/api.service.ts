@@ -13,7 +13,7 @@ export class ApiService {
   private filter: any;
   private httpHeaders = new HttpHeaders({
     'x-rapidapi-host': 'tasty.p.rapidapi.com',
-    'x-rapidapi-key': '2ebc11effamsh00e488b77941fe3p146743jsna110603736c7'
+    'x-rapidapi-key': '2e53bcd25amsh2e1b1991a244a37p107e91jsn1fe61a9c14d7'
   });
 
   constructor(private httpClient: HttpClient) {

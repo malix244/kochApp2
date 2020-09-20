@@ -9,18 +9,20 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { IngredientSearchComponent } from './ingredient-search/ingredient-search.component';
 
 const defaultRoute: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
   {path: 'search-per-filter', component: FilterSearchComponent},
-  {path: 'search-by-ingredients', component: DashboardComponent},
+  {path: 'search-by-ingredients', component: IngredientSearchComponent},
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    FilterSearchComponent
+    FilterSearchComponent,
+    IngredientSearchComponent
   ],
     imports: [
         BrowserModule,
