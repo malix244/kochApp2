@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {faHeart as fasHeart, faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import {faHeart as farHeart, faStar as farStar, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
-import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal,  NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import {RecipeService} from '../shared/recipes/recipe.service';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
-
-
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +14,7 @@ import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 })
 
 export class DashboardComponent implements OnInit {
+  title = 'ng-bootstrap-modal-demo';
   farHeart = farHeart;
   fasHeart = fasHeart;
   heart = farHeart;
@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
   farStar = farStar;
   farClock = faClock;
   farUsers = faUser;
-  title = 'ng-bootstrap-modal-demo';
   closeResult: string;
   modalOptions: NgbModalOptions;
   color: ThemePalette = 'primary';
@@ -33,17 +32,8 @@ export class DashboardComponent implements OnInit {
   public weeklyRecipes = [];
   private favourite = false;
   public loading: boolean;
-  public currRecipe: any;
 
-  constructor(private modalService: NgbModal, private recipeService: RecipeService) {
-    this.modalOptions = {
-      windowClass: 'recipe-modal',
-      backdrop: 'static',
-      centered: true,
-      backdropClass: 'customBackdrop',
-      size: 'xl',
-      scrollable: true
-    };
+  constructor(private modalService: NgbModal, private recipeService: RecipeService, public appComponent: AppComponent) {
     this.loading = false;
     this.recipeService.loadRecipes(3).then(() => {
       this.randomRecipes = this.recipeService.getRandomRecipes();
@@ -55,8 +45,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   changeFavourite(): void {
     if (this.favourite){
@@ -65,46 +54,6 @@ export class DashboardComponent implements OnInit {
     } else {
       this.favourite = true;
       this.heart = fasHeart;
-    }
-  }
-
-  getBackground(recipe: any): string{
-    if (recipe.thumbnail_url !== undefined) {
-      return recipe.thumbnail_url;
-    } else{
-      return '/assets/img/pexels-artem-beliaikin-929192.jpg';
-    }
-  }
-
-  calculatedStars(rating: any): any[] {
-    const stars = [];
-    const fullStars = (parseFloat(rating) * 5).toFixed();
-    for (let i = 0; i < 5; i++) {
-      if ((i) < parseInt(fullStars, 10)) {
-        stars.push(fasStar);
-      } else {
-        stars.push(farStar);
-      }
-    }
-    return stars;
-  }
-
-  open(content, recipe: any): void {
-    this.currRecipe = recipe;
-    this.modalService.open(content, this.modalOptions).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
     }
   }
 }

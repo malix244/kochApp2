@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {concatMap, tap} from 'rxjs/operators';
+import {ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,9 @@ export class ApiService {
   private randomRecipes = [];
   private weeklyRecipes = [];
   private filter: any;
+  public searchedRecipe: object;
+  public foundRecipe: object;
+  public searchedList: object;
   private httpHeaders = new HttpHeaders({
     'x-rapidapi-host': 'tasty.p.rapidapi.com',
     'x-rapidapi-key': '2e53bcd25amsh2e1b1991a244a37p107e91jsn1fe61a9c14d7'
@@ -44,6 +48,7 @@ export class ApiService {
   public getFilter(): any {
     return this.filter.results;
   }
+
   public loadRecipes(queries: any, random: boolean = true): Promise<any> {
     if (Array.isArray(queries)){
       queries = queries[0];
@@ -79,4 +84,60 @@ export class ApiService {
     return (Math.random() * (max - min) + min).toFixed();
   }
 
+  getSearchedRecipe(queries: string): Promise<any> {
+    this.promise = new Promise((resolve, reject) => {
+      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=' + queries,
+        {headers: this.httpHeaders})
+        .pipe(
+          tap(res => {
+            this.searchedRecipe = res;
+          })
+        )
+        .toPromise()
+        .then(
+          () => {
+            resolve();
+          }
+        );
+    });
+    return this.promise;
+  }
+
+  getRecipeList(querie: string): Promise<any> {
+    this.promise = new Promise((resolve, reject) => {
+      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/list?q=' + querie + '&from=0&sizes=10',
+        {headers: this.httpHeaders})
+        .pipe(
+          tap(res => {
+            this.searchedList= res;
+          })
+        )
+        .toPromise()
+        .then(
+          () => {
+            resolve();
+          }
+        );
+    });
+    return this.promise;
+  }
+
+  getRecipe(recipeID: string): Promise<any> {
+    this.promise = new Promise((resolve, reject) => {
+      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/detail?id=' + recipeID,
+        {headers: this.httpHeaders})
+        .pipe(
+          tap(res => {
+            this.foundRecipe = res;
+          })
+        )
+        .toPromise()
+        .then(
+          () => {
+            resolve();
+          }
+        );
+    });
+    return this.promise;
+  }
 }
