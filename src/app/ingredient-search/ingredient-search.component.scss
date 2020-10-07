@@ -28,12 +28,12 @@ $star: #ffc416;
   }
 
 
-.filter-component {
+.ingredient-search-component {
     padding: 16px;
     display: flex;
 
 
-    .filters {
+    .ingredients {
         height: 100%;
         display: flex;
         width: 20%;
@@ -42,25 +42,23 @@ $star: #ffc416;
         font-family: 'Montserrat', 'Roboto', sans-serif;
         font-size: 1.5rem;
 
-        .filter-checkboxes {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
+        > .form-inline {
 
-            > li {
-                border: none;
-                display: flex;
-                flex-direction: row;
-                margin-bottom: 10px;
-                
+            > .ingredients-inputs {
 
-                > .checkbox {
-                    margin-right: 5px;
-                    height: 1.3rem;
-                    width: 1.3rem;
+
+            }
+
+            > .ingredients-button {
+
+                > .btn-search {
+                    
                 }
+
             }
         }
+
+    
     }
 
     .recipes {

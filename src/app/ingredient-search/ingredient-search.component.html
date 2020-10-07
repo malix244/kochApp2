@@ -1,1 +1,68 @@
-<p>ingredient-search works!</p>
+<div class="ingredient-search-component">
+    <div class="ingredients">
+        <form class="form-inline">
+            <li class="ingredients-inputs">
+                <input class="form-control mr-sm-2" type="ingredient" placeholder="Ingredient" aria-label="Ingredient">
+            </li>
+
+            <li class="ingredients-button">
+                <button class="btn-search" type="submit">Search</button>
+            </li>
+        </form>
+    </div>
+    <div class="recipes">
+        <ul id="recipes">
+            <li *ngFor="let number of numbers">
+                <div class="favouriteIcon">
+                    <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
+                </div>
+                <a href="#">
+                    <div class="recipe-image">
+                        <img src="../assets/img/pexels-artem-beliaikin-929192.jpg">
+                    </div>
+                    <div class="recipe-description">
+                        <div class="recipe-title">
+                            <div class="recipe-header">
+                                <h3>Bolognese</h3>
+                            </div>
+                            <div class="recipe-main">
+                                <p>#meat #main-dish</p>
+                            </div>
+                        </div>
+                        <div class="recipe-stats">
+                            <div class="stars">
+                                <li>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                    <a><fa-icon [icon]="farStar"></fa-icon></a>
+                                </li>
+                            </div>
+                            <div class="time">
+                                <div class="time-symbol">
+                                    <fa-icon [icon]="farClock"></fa-icon>
+                                </div>
+                                <div class="time-main">
+                                    15 Mins
+                                </div>
+                            </div>
+                            <div class="users">
+                                <div class="users-symbol">
+                                    <fa-icon [icon]="farUsers"></fa-icon>
+                                </div>
+                                <div class="users-main">
+                                    Serves 2
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    
+
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
