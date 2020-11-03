@@ -52,11 +52,11 @@ export class FilterSearchComponent implements OnInit {
   // tslint:disable-next-line: typedef
   onSelectVegetarian(event) {
     if (event.target.checked) {
+      (document.getElementById('checkboxVegan') as any).disabled = true;
       (document.getElementById('checkboxMeat') as any).disabled = true;
-
-
       (document.getElementById('checkboxFish') as any).disabled = true;
     } else {
+      (document.getElementById('checkboxVegan') as any).disabled = false;
       (document.getElementById('checkboxMeat') as any).disabled = false;
       (document.getElementById('checkboxFish') as any).disabled = false;
     }

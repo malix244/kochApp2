@@ -50,59 +50,62 @@
                 </div>
             </li>
         </ul>
+        <div class="search-button">
+            <button class="btn-search" type="submit">Search</button>
+        </div>
     </div>
 
     <div class="recipes">
         <ul id="recipes">
-            <li *ngFor="let number of numbers">
+            <li *ngFor="let recipe of filterRecipes">
                 <div class="favouriteIcon">
                     <a (click)="changeFavourite()"><fa-icon [icon]="heart"></fa-icon></a>
                 </div>
                 <a href="#">
-                    <div class="recipe-image">
-                        <img src="../assets/img/pexels-artem-beliaikin-929192.jpg">
-                    </div>
-                    <div class="recipe-description">
-                        <div class="recipe-title">
-                            <div class="recipe-header">
-                                <h3>Bolognese</h3>
-                            </div>
-                            <div class="recipe-main">
-                                <p>#meat #main-dish</p>
-                            </div>
+                    <form class="form-inline" action="/action_page.php">
+                        <div class="recipe-image">
+                            <img src="../assets/img/pexels-artem-beliaikin-929192.jpg">
                         </div>
-                        <div class="recipe-stats">
-                            <div class="stars">
-                                <li>
-                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                    <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                    <a><fa-icon [icon]="farStar"></fa-icon></a>
-                                </li>
-                            </div>
-                            <div class="time">
-                                <div class="time-symbol">
-                                    <fa-icon [icon]="farClock"></fa-icon>
+                        <div class="recipe-description">
+                            <div class="recipe-title">
+                                <div class="recipe-header">
+                                    <h3>Bolognese</h3>
                                 </div>
-                                <div class="time-main">
-                                    15 Mins
+                                <div class="recipe-main">
+                                    <p>#meat #main-dish</p>
                                 </div>
                             </div>
-                            <div class="users">
-                                <div class="users-symbol">
-                                    <fa-icon [icon]="farUsers"></fa-icon>
+                            <div class="recipe-stats">
+                                <div class="stars">
+                                    <li>
+                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
+                                        <a><fa-icon [icon]="farStar"></fa-icon></a>
+                                    </li>
                                 </div>
-                                <div class="users-main">
-                                    Serves 2
+                                <div class="time">
+                                    <div class="time-symbol">
+                                        <fa-icon [icon]="farClock"></fa-icon>
+                                    </div>
+                                    <div class="time-main">
+                                        15 Mins
+                                    </div>
                                 </div>
+                                <div class="users">
+                                    <div class="users-symbol">
+                                        <fa-icon [icon]="farUsers"></fa-icon>
+                                    </div>
+                                    <div class="users-main">
+                                        Serves 2
+                                    </div>
 
+                                </div>
                             </div>
+
                         </div>
-
-                    </div>
-                    
-
+                    </form>
                 </a>
             </li>
         </ul>
