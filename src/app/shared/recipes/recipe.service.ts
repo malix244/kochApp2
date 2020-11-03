@@ -8,6 +8,7 @@ export class RecipeService{
   private randomRecipe: any;
   public randomRecipes = [];
   public weeklyRecipes = [];
+  public filterRecipes = [];
   private randomFilters: any[];
   private loadFilter: boolean;
 
@@ -37,6 +38,9 @@ export class RecipeService{
   public getWeeklyRecipes(): any {
     return this.weeklyRecipes;
   }
+  public getFilterRecipes(): any {
+    return this.filterRecipes;
+  }
 
   public loadRecipes(numberOfRecipes: number): Promise<any> {
     return this.apiService.loadTags().then(async () => {
@@ -47,6 +51,9 @@ export class RecipeService{
           await this.apiService.loadRecipes(this.randomFilters[i], false).then(() => {
             this.weeklyRecipes = this.apiService.getWeeklyRecipes();
           });
+        });
+        await this.apiService.loadRecipes(this.getRandom(this.randomFilters, 1)).then(async () => {
+          this.filterRecipes = this.apiService.getFilterRecipes();
         });
       }
     });

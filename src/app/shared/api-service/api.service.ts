@@ -10,6 +10,7 @@ export class ApiService {
   private promise: Promise<unknown>;
   private randomRecipes = [];
   private weeklyRecipes = [];
+  private filterRecipes = [];
   private filter: any;
   private httpHeaders = new HttpHeaders({
     'x-rapidapi-host': 'tasty.p.rapidapi.com',
@@ -55,10 +56,11 @@ export class ApiService {
         .then(
           (res) => {
             if (random){
-              this.randomRecipes.push(res.results[this.randomNumber(0, 10)]);
+              //this.randomRecipes.push(res.results[this.randomNumber(0, 10)]);
+              //this.filterRecipes.push(res.results[this.randomNumber(0, 10)]);
               resolve();
             } else {
-              this.weeklyRecipes.push(res.results[1]);
+              //this.weeklyRecipes.push(res.results[1]);
               resolve();
             }
           }
@@ -73,6 +75,10 @@ export class ApiService {
 
   public getWeeklyRecipes(): any {
     return this.weeklyRecipes;
+  }
+
+  public getFilterRecipes(): any {
+    return this.filterRecipes;
   }
 
   private randomNumber(min, max): number {
