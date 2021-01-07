@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faHeart as fasHeart, faSleigh, faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farHeart, faStar as farStar, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
+import {NgbModal,  NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {RecipeService} from '../shared/recipes/recipe.service';
+import {AppComponent} from '../app.component';
 import { CheckboxControlValueAccessor } from '@angular/forms';
 import { $ } from 'protractor';
 
@@ -18,6 +21,7 @@ export class FilterSearchComponent implements OnInit {
   farStar = farStar;
   farClock = faClock;
   farUsers = faUser;
+  modalOptions: NgbModalOptions;
 
 
   private favourite = false;
@@ -31,9 +35,15 @@ export class FilterSearchComponent implements OnInit {
   checkboxMainDish = false;
   checkboxDessert = false;
 
+  public loading: boolean;
+  public filterRecipes: [];
 
-  constructor() {
-    this.numbers = Array(10).fill(0).map((x, i) => i);
+
+  constructor(private modalService: NgbModal, private recipeService: RecipeService, public appComponent: AppComponent) {
+    this.loading = false;
+    this.recipeService.loadRecipes(5).then(() => {
+      this.filterRecipes = this.recipeService.getFilterRecipes();
+    });
   }
 
   ngOnInit(): void {

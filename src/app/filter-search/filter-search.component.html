@@ -69,7 +69,7 @@
                         <div class="recipe-description">
                             <div class="recipe-title">
                                 <div class="recipe-header">
-                                    <h3>Bolognese</h3>
+                                    <h3>{{ (recipe.name.length>40)? (recipe.name | slice:0:40)+'..':(recipe.name) }}</h3>
                                 </div>
                                 <div class="recipe-main">
                                     <p>#meat #main-dish</p>
@@ -77,20 +77,18 @@
                             </div>
                             <div class="recipe-stats">
                                 <div class="stars">
-                                    <li>
-                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                        <a><fa-icon [icon]="fasStar"></fa-icon></a>
-                                        <a><fa-icon [icon]="farStar"></fa-icon></a>
-                                    </li>
+                                    <li *ngIf="recipe.user_ratings !== undefined">
+                                        <a *ngFor="let ratingStar of appComponent.calculatedStars(recipe.user_ratings.score)">
+                                          <fa-icon [icon]="ratingStar"></fa-icon>
+                                        </a>
+                                      </li>
                                 </div>
                                 <div class="time">
                                     <div class="time-symbol">
                                         <fa-icon [icon]="farClock"></fa-icon>
                                     </div>
                                     <div class="time-main">
-                                        15 Mins
+                                        {{ recipe.cook_time_minutes + recipe.prep_time_minutes }} Mins
                                     </div>
                                 </div>
                                 <div class="users">
@@ -98,7 +96,7 @@
                                         <fa-icon [icon]="farUsers"></fa-icon>
                                     </div>
                                     <div class="users-main">
-                                        Serves 2
+                                        {{ recipe.yields }}
                                     </div>
 
                                 </div>

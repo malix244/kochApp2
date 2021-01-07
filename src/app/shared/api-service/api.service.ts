@@ -50,53 +50,13 @@ export class ApiService {
     return this.filter.results;
   }
 
-  public loadRecipes(queries: any, random: boolean = true): Promise<any> {
-    if (Array.isArray(queries)){
-      queries = queries[0];
-    }
+  getRecipeList(querie: string): Promise<any> {
     this.promise = new Promise((resolve, reject) => {
-      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/list?tags=' + queries.name + '&from=0&sizes=5',
-        {headers: this.httpHeaders})
-        .toPromise()
-        .then(
-          (res) => {
-            if (random){
-              //this.randomRecipes.push(res.results[this.randomNumber(0, 10)]);
-              //this.filterRecipes.push(res.results[this.randomNumber(0, 10)]);
-              resolve();
-            } else {
-              //this.weeklyRecipes.push(res.results[1]);
-              resolve();
-            }
-          }
-        );
-    });
-    return this.promise;
-  }
-
-  public getRandomRecipes(): any {
-    return this.randomRecipes;
-  }
-
-  public getWeeklyRecipes(): any {
-    return this.weeklyRecipes;
-  }
-
-  public getFilterRecipes(): any {
-    return this.filterRecipes;
-  }
-
-  private randomNumber(min, max): number {
-    return (Math.random() * (max - min) + min).toFixed();
-  }
-
-  getSearchedRecipe(queries: string): Promise<any> {
-    this.promise = new Promise((resolve, reject) => {
-      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=' + queries,
+      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/list?q=' + querie + '&from=0&sizes=10',
         {headers: this.httpHeaders})
         .pipe(
           tap(res => {
-            this.searchedRecipe = res;
+            this.searchedList = res;
           })
         )
         .toPromise()
@@ -109,13 +69,13 @@ export class ApiService {
     return this.promise;
   }
 
-  getRecipeList(querie: string): Promise<any> {
+  getSearchedRecipe(queries: string): Promise<any> {
     this.promise = new Promise((resolve, reject) => {
-      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/list?q=' + querie + '&from=0&sizes=10',
+      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=' + queries,
         {headers: this.httpHeaders})
         .pipe(
           tap(res => {
-            this.searchedList= res;
+            this.searchedRecipe = res;
           })
         )
         .toPromise()
@@ -146,4 +106,46 @@ export class ApiService {
     });
     return this.promise;
   }
+
+
+  public loadRecipes(queries: any, random: boolean = true): Promise<any> {
+    if (Array.isArray(queries)){
+      queries = queries[0];
+    }
+    this.promise = new Promise((resolve, reject) => {
+      this.httpClient.get('https://tasty.p.rapidapi.com/recipes/list?tags=' + queries.name + '&from=0&sizes=5',
+        {headers: this.httpHeaders})
+        .toPromise()
+        .then(
+          (res) => {
+            if (random){
+              this.randomRecipes.push(res.results[this.randomNumber(0, 10)]);
+              this.filterRecipes.push(res.results[this.randomNumber(0, 10)]);
+              resolve();
+            } else {
+              this.weeklyRecipes.push(res.results[1]);
+              resolve();
+            }
+          }
+        );
+    });
+    return this.promise;
+  }
+
+  public getRandomRecipes(): any {
+    return this.randomRecipes;
+  }
+
+  public getWeeklyRecipes(): any {
+    return this.weeklyRecipes;
+  }
+
+  public getFilterRecipes(): any {
+    return this.filterRecipes;
+  }
+
+  private randomNumber(min, max): number {
+    return (Math.random() * (max - min) + min).toFixed();
+  }
+
 }
